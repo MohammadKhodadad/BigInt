@@ -17,7 +17,7 @@ BigInt num2(32);
 The third constructor takes a string. takes the first char if is + or - as the sign (if it is not - or +, assumes the number is positive as is obviously)
 then the rest of the string is set as a value.
 
-<code>  
+<code>
 BigInt num3("-0013");
 </code>
 
