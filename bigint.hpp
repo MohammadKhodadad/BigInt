@@ -380,7 +380,10 @@ BigInt BigInt::operator-(const BigInt &other) const
 }
 /*
 This operation first finds the output sign. Then, does a multiplication just like the one we did in primary school.
- It iterates over the digits of the second number ( from smaller to greater digit) and does the multiplication. Finally, sums them up.
+ It iterates over the digits of the second number ( from smaller to greater digit) and does the multiplication. 
+ To do the multiplication, the digit is multiplied by each digit in the first number (from the smallest to the greatest),
+the modulo by 10 is stored as the output number for the corresponding digit, and the remaining divided by 10 is carried to the next digit.
+Finally, sums them up.
 */
 BigInt &BigInt::operator*=(const BigInt &other)
 {
