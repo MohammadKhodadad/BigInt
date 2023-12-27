@@ -103,8 +103,11 @@ If the difference is below zero, reduce the next digit in the greater number by 
  cout<< "61-25= "<< x2 <<"\n";
 </code>
 
-Operator *= and * Tfirst find the output sign. Then, do a multiplication just like the one we did in primary school.
- It iterates over the digits of the second number ( from smaller to greater digit) and does the multiplication. Finally, sums them up.
+Operator *= and * first find the output sign. Then, do a multiplication just like the one we did in primary school.
+ It iterates over the digits of the second number ( from smaller to greater digit) and does the multiplication. 
+ To do the multiplication, the digit is multiplied by each digit in the first number (from the smallest to the greatest),
+the modulo by 10 is stored as the output number for the corresponding digit, and the remaining divided by 10 is carried to the next digit.
+Finally, sum them up.
 
 
 <code>
