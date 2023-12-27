@@ -15,7 +15,7 @@ The second constructor takes an int64_t and sets the absolute of the number as v
 </code>
 
 The third constructor takes a string. takes the first char if is + or - as the sign (if it is not - or +, assumes the number is positive as is obviously)
-then the rest of the string is set as a value.
+then the rest of the string is set as a value. The code also checks if the string is not empty, and does not have irrelevant chars.
 
 <code>
  BigInt num3("-0013");
@@ -25,12 +25,6 @@ The constructors, using function reduce, make sure there are no zeros on the lef
 
 ###Operators
 The code includes multiple operators for different tasks.
-####Assignment Operator
-this operator assigns a variable as an object.
-<code> 
- BigInt new_num2=num2;
- cout << "new_num2= " <<new_num2;
-</code>
 
 ####Assignment Operator
 The assignment operator lets us assign a new object to a variable.
@@ -64,6 +58,13 @@ The operator == checks if the rhs is equal to the lhs. this operator checks if t
  cout<< "25==25 = "<< (a3==b3) <<"\n";
 </code>
 
+The operator != is the negation of ==
+
+<code>
+ BigInt a4("+14");
+ BigInt b4("14");
+ cout << "14!=14 = " << (a4 != b4) << "\n";
+</code>
 
 The operators >= and <= are the combination of > and = or < and =.
 <code>
