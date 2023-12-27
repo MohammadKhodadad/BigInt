@@ -129,7 +129,7 @@ bool BigInt::operator==(const BigInt &other) const
 // This operator is the negation of ==.
 bool BigInt::operator!=(const BigInt &other) const
 {
-    return ~(*this == other);
+    return !(*this == other);
 }
 /*
 This operator divides the problem into multiple settings. If the signs of the two numbers are different, the answer is the positive one.

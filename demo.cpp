@@ -32,7 +32,7 @@ int main()
 
     // Now the assignment operator
     num2 = BigInt(64);
-    cout << "num2= " << num2;
+    cout << "num2= " << num2<< "\n";
     // Now testing Comparison operations
 
     BigInt a1(42);
