@@ -30,6 +30,9 @@ int main()
         cout << e.what() << "\n";
     }
 
+    // First, the outputstream operator<<
+    cout << "num1= " << num1<< "\n";
+
     // Now the assignment operator
     num2 = BigInt(64);
     cout << "num2= " << num2<< "\n";

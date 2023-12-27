@@ -423,7 +423,7 @@ BigInt BigInt::operator*(const BigInt &other) const
     new_this *= other;
     return new_this;
 }
-// this operator handles streams.
+// this operator inserts to an output stream
 ostream &operator<<(std::ostream &os, const BigInt &bigint)
 {
     return os << bigint.sign << bigint.value;
