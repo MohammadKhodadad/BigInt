@@ -114,3 +114,11 @@ Operator *= and * Tfirst find the output sign. Then, do a multiplication just li
  x4 *= y4;
  cout << "(-11)*(+19)= " << x4 << "\n";
 </code>
+
+
+<< operator inserts to an output stream
+
+<code>
+ BigInt num1;
+ cout << "num1= " << num1<< "\n";
+</code>
