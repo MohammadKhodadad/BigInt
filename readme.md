@@ -61,3 +61,53 @@ BigInt a3("+25");
 BigInt b3("25");
 cout<< "25==25 = "<< (a3==b3) <<"\n";
 </code>
+
+
+The operators >= and <= are the combination of > and = or < and =.
+<code>
+BigInt a5("+9552500215415124");
+BigInt b5("22154855451221888788995652326588451212002558852");
+cout<< "+9552500215415124>= 2154855451221888788995652326588451212002558852 = "<< (a5>=b5) <<"\n";
+</code>
+
+
+The operators += and + are designed in this way. += divides the scenario in terms of numbers signs and whether the absolute of each one is greater than another one.
+First, the case where both are positive.
+It does the simple summation we used to do back in the primary school. it iterates over the digits (from smallest to greatest). sums every two digits.
+if the sum is over 9, 1 is carried to the next digit. 
+Second, the case where both are negative.
+In this case, the code assumes both are positive and finally negates the summed output.
+Third, the case where one is positive and one is negative.
+In this case, the code, first, finds the number with a greater absolute and then calculates the difference between the absolute values,
+using  the subtraction method that we used to do in primary school. It iterates over the digits of the number with lower absolute (from smallest to greatest). for each digit computes the greater number's digit - the smaller's number digit.
+If the difference is below zero, reduce the next digit in the greater number by 1. After finishing the subtraction, if the number with a greater absolute is negative, negates the output. 
+
+<code>
+BigInt x1(41);
+BigInt y1(52);
+cout<< "41+52= "<< (x1+y1) <<"\n";
+x1+=y1;
+cout<< "41+52= "<< x1 <<"\n";
+</code>
+
+
+-= and = first negate the rhs and then does a summation
+<code>
+BigInt x2(61);
+BigInt y2(25);
+cout<< "61-25= "<< (x2-y2) <<"\n";
+x2-=y2;
+cout<< "61-25= "<< x2 <<"\n";
+</code>
+
+Operator *= and * Tfirst find the output sign. Then, do a multiplication just like the one we did in primary school.
+ It iterates over the digits of the second number ( from smaller to greater digit) and does the multiplication. Finally, sums them up.
+
+
+ <code>
+BigInt x4("-11");
+BigInt y4("+19");
+cout << "(-11)*(+19)= " << (x4 * y4) << "\n";
+x4 *= y4;
+cout << "(-11)*(+19)= " << x4 << "\n";
+ </code>
