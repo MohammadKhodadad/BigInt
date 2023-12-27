@@ -37,7 +37,7 @@ int main()
     num2 = BigInt(64);
     cout << "num2= " << num2<< "\n";
     // Now testing Comparison operations
-
+    cout<< boolalpha;
     BigInt a1(42);
     BigInt b1(52);
     cout << "42>52= " << (a1 > b1) << "\n";
