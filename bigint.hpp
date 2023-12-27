@@ -4,7 +4,7 @@
 
 using namespace std;
 
-/*Here is the class definition. The class has two parameters, value and sign. 
+/*Here is the class definition. The class has two parameters, value and sign.
 The sign is the sign of the number. The value is the number itself stored in string format. */
 class BigInt
 {
@@ -42,12 +42,12 @@ void BigInt::reduce()
     if (value == "0")
         sign = '+';
 }
-/*Here are the constructors
+/*The code has three constructors.
 The first constructor takes nothing and creates an object BigInt with sign positive and value 0
 The second constructor takes an int64_t and sets the absolute of the number as value and the sign of the number as sign
-The third constructor takes a string. takes the first char if is + or - as the sign (if there is non assumes the number is positive as is obviously)
-then the rest of the string is set as value. 
-The constructors, using function reduce, make sure there is no zeros on the left side of the value, and also the number is positive if the value is 0.
+The third constructor takes a string. takes the first char if is + or - as the sign (if it is not - or +, assumes the number is positive as is obviously)
+then the rest of the string is set as a value.
+The constructors, using function reduce, make sure there are no zeros on the left side of the value, and also the number is positive if the value is 0.
  */
 BigInt::BigInt()
 {
@@ -105,14 +105,13 @@ BigInt::BigInt(string num)
 
 // the operator = assigns the value and the sign as the right hand side.
 
-
 BigInt &BigInt::operator=(const BigInt &other)
 {
     value = other.value;
     sign = other.sign;
     return (*this);
 }
-// this operator checks if the size, the sign, and each digits in the two BigInts are the same.
+// this operator checks if the size, the sign, and each digit in the two BigInts are the same.
 bool BigInt::operator==(const BigInt &other) const
 {
     if (sign != other.sign)
@@ -133,7 +132,7 @@ bool BigInt::operator!=(const BigInt &other) const
     return ~(*this == other);
 }
 /*
-This oeprator devides the problem into multiple settings. If the signs of the two numbers are different, the answer is the one that is postitve. 
+This operator divides the problem into multiple settings. If the signs of the two numbers are different, the answer is the positive one.
 If the signs are the same, the code iterates over digits until one digit is bigger than another one.
 */
 bool BigInt::operator>(const BigInt &other) const
@@ -199,16 +198,16 @@ bool BigInt::operator<=(const BigInt &other) const
     return other >= (*this);
 }
 /*
-This opertor divides the scenario in terms of numbers signs and whether the absolute of each one is greater than another one.
+This operator divides the scenario in terms of numbers signs and whether the absolute of each one is greater than another one.
 First, the case where both are positive.
-It does the simple summation we used to do back in the primariy school. it iterates over the digits (from smallest to greatest). sums each two digit.
-if the sum is over 9, 1 is carried to the next digit. 
+It does the simple summation we used to do back in the primary school. it iterates over the digits (from smallest to greatest). sums every two digits.
+if the sum is over 9, 1 is carried to the next digit.
 Second, the case where both are negative.
-In this case the code assumes both are postivie, finally negates the summed output.
+In this case, the code assumes both are positive and finally negates the summed output.
 Third, the case where one is positive and one is negative.
-In this case, the code, first, finds the number with greater absolute and then calculates the difference between the absolute values,
-using  the substraction method that we used to do in the primary school. It iterates over the digits of the number with lower absolute (from smallest to greatest). for each digit computes the greater number's digit - the smaller's number digit.
-If the difference is bellow zero, reduces the next digit in the greater number by 1. After finishing the substraction, if the number with greater absolute is negative, negates the output. 
+In this case, the code, first, finds the number with a greater absolute and then calculates the difference between the absolute values,
+using  the subtraction method that we used to do in primary school. It iterates over the digits of the number with lower absolute (from smallest to greatest). for each digit computes the greater number's digit - the smaller's number digit.
+If the difference is below zero, reduce the next digit in the greater number by 1. After finishing the subtraction, if the number with a greater absolute is negative, negates the output.
 */
 BigInt &BigInt::operator+=(const BigInt &other)
 {
@@ -336,7 +335,7 @@ BigInt &BigInt::operator+=(const BigInt &other)
             *this = new_this;
             return *this;
         }
-        else //(new_other>=new_this)
+        else
         {
             int64_t temp_neg = 0;
             for (int64_t i = 0; i < new_this.value.size(); i++)
@@ -381,7 +380,7 @@ BigInt BigInt::operator-(const BigInt &other) const
 }
 /*
 This operation first finds the output sign. Then, does a multiplication just like the one we did in primary school.
- It iterates over the digits of the second number ( from smaller to greater digit), and does the multiplication. Finaly, summs them up.
+ It iterates over the digits of the second number ( from smaller to greater digit) and does the multiplication. Finally, sums them up.
 */
 BigInt &BigInt::operator*=(const BigInt &other)
 {
