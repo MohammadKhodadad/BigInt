@@ -4,8 +4,12 @@
 
 using namespace std;
 
-/*Here is the class definition. The class has two parameters, value and sign.
-The sign is the sign of the number. The value is the number itself stored in string format. */
+
+/**
+ * @brief The class has two parameters, value and sign.
+The sign is the sign of the number. The value is the number itself stored in string format
+ * 
+ */
 class BigInt
 {
 
@@ -34,7 +38,10 @@ public:
 
     friend ostream &operator<<(std::ostream &os, const BigInt &bigint);
 };
-// Reduce does two things. First, removes zeros on the left side of the number. Second, if the number is zero, makes sure the sign is positive.
+/**
+ * @brief Reduce does two things. First, removes zeros on the left side of the number. Second, if the number is zero, makes sure the sign is positive.
+ *
+ */
 void BigInt::reduce()
 {
     while ((value.size() > 1) && value[0] == '0')
@@ -42,19 +49,22 @@ void BigInt::reduce()
     if (value == "0")
         sign = '+';
 }
-/*The code has three constructors.
-The first constructor takes nothing and creates an object BigInt with sign positive and value 0
-The second constructor takes an int64_t and sets the absolute of the number as value and the sign of the number as sign
-The third constructor takes a string. takes the first char if is + or - as the sign (if it is not - or +, assumes the number is positive as is obviously)
-then the rest of the string is set as a value.
-The constructors, using function reduce, make sure there are no zeros on the left side of the value, and also the number is positive if the value is 0.
- */
+
+/**
+ * @brief The first constructor takes nothing and creates an object BigInt with sign positive and value 0
+*/
 BigInt::BigInt()
 {
     value = "0";
     sign = '+';
 }
 
+/**
+ * @brief The second constructor takes an int64_t and sets the absolute of the number as value and the sign of the number as sign. 
+ * The constructors, using function reduce, make sure there are no zeros on the left side of the value, and also the number is positive if the value is 0.
+ * 
+ * @param num 
+ */
 BigInt::BigInt(int64_t num)
 {
     if (num >= 0)
@@ -70,7 +80,13 @@ BigInt::BigInt(int64_t num)
     if (value == "0")
         sign = '+';
 }
-// For the string format, the code checks if the string is not empty, and does not have irrelevant chars. The number can start with '-' or '+'.
+/**
+ * @brief The third constructor takes a string. takes the first char if is + or - as the sign (if it is not - or +, assumes the number is positive as is obviously)
+then the rest of the string is set as a value. For the string format, the code checks if the string is not empty, and does not have irrelevant chars. 
+The number can start with '-' or '+'. The constructors, using function reduce, make sure there are no zeros on the left side of the value, and also the number is positive if the value is 0.
+ * 
+ * @param num 
+ */
 BigInt::BigInt(string num)
 {
     if (num.size() == 0)
@@ -103,15 +119,25 @@ BigInt::BigInt(string num)
     reduce();
 }
 
-// the operator = assigns the value and the sign as the right hand side.
-
+/**
+ * @brief the operator = assigns the value and the sign as the right hand side.
+ * 
+ * @param other 
+ * @return BigInt& 
+ */
 BigInt &BigInt::operator=(const BigInt &other)
 {
     value = other.value;
     sign = other.sign;
     return (*this);
 }
-// this operator checks if the size, the sign, and each digit in the two BigInts are the same.
+/**
+ * @brief this operator checks if the size, the sign, and each digit in the two BigInts are the same.
+ * 
+ * @param other 
+ * @return true 
+ * @return false 
+ */
 bool BigInt::operator==(const BigInt &other) const
 {
     if (sign != other.sign)
@@ -126,15 +152,25 @@ bool BigInt::operator==(const BigInt &other) const
     return true;
 }
 
-// This operator is the negation of ==.
+/**
+ * @brief This operator is the negation of ==.
+ * 
+ * @param other 
+ * @return true 
+ * @return false 
+ */
 bool BigInt::operator!=(const BigInt &other) const
 {
     return !(*this == other);
 }
-/*
-This operator divides the problem into multiple settings. If the signs of the two numbers are different, the answer is the positive one.
+/**
+ * @brief This operator divides the problem into multiple settings. If the signs of the two numbers are different, the answer is the positive one.
 If the signs are the same, the code iterates over digits until one digit is bigger than another one.
-*/
+ * 
+ * @param other 
+ * @return true 
+ * @return false 
+ */
 bool BigInt::operator>(const BigInt &other) const
 {
     if ((sign == '+') && (other.sign == '-'))
@@ -181,23 +217,42 @@ bool BigInt::operator>(const BigInt &other) const
     }
     return false;
 }
-// this opertor is the oposite of >
+/**
+ * @brief this opertor is the oposite of >
+ * 
+ * @param other 
+ * @return true 
+ * @return false 
+ */
 bool BigInt::operator<(const BigInt &other) const
 {
     return other > (*this);
 }
-// this opertor is > or ==
+/**
+ * @brief this opertor is > or ==
+ * 
+ * @param other 
+ * @return true 
+ * @return false 
+ */
 bool BigInt::operator>=(const BigInt &other) const
 {
     return (((*this) > other) || ((*this) == other));
 }
 
-// this opertor is the oposite of >=
+/**
+ * @brief this opertor is the oposite of >=
+ * 
+ * @param other 
+ * @return true 
+ * @return false 
+ */
 bool BigInt::operator<=(const BigInt &other) const
 {
     return other >= (*this);
 }
-/*
+/**
+ * 
 This operator divides the scenario in terms of numbers signs and whether the absolute of each one is greater than another one.
 First, the case where both are positive.
 It does the simple summation we used to do back in the primary school. it iterates over the digits (from smallest to greatest). sums every two digits.
@@ -208,7 +263,10 @@ Third, the case where one is positive and one is negative.
 In this case, the code, first, finds the number with a greater absolute and then calculates the difference between the absolute values,
 using  the subtraction method that we used to do in primary school. It iterates over the digits of the number with lower absolute (from smallest to greatest). for each digit computes the greater number's digit - the smaller's number digit.
 If the difference is below zero, reduce the next digit in the greater number by 1. After finishing the subtraction, if the number with a greater absolute is negative, negates the output.
-*/
+ * 
+ * @param other 
+ * @return BigInt& 
+ */
 BigInt &BigInt::operator+=(const BigInt &other)
 {
 
@@ -356,7 +414,12 @@ BigInt &BigInt::operator+=(const BigInt &other)
     }
 }
 
-// This operator first negates the right hand side then does a summation
+/**
+ * @brief This operator first negates the right hand side then does a summation
+ * 
+ * @param other 
+ * @return BigInt& 
+ */
 BigInt &BigInt::operator-=(const BigInt &other)
 {
     BigInt new_other(other.value);
@@ -364,27 +427,40 @@ BigInt &BigInt::operator-=(const BigInt &other)
         new_other.sign = '-';
     return (*this) += new_other;
 }
-// This operator uses the summation and assignment that we wrote.
+/**
+ * @brief This operator uses the summation and assignment that we wrote.
+ * 
+ * @param other 
+ * @return BigInt 
+ */
 BigInt BigInt::operator+(const BigInt &other) const
 {
     BigInt new_this = (*this);
     new_this += other;
     return new_this;
 }
-// This operator uses the substraction and assignment that we wrote.
+/**
+ * @brief This operator uses the substraction and assignment that we wrote.
+ * 
+ * @param other 
+ * @return BigInt 
+ */
 BigInt BigInt::operator-(const BigInt &other) const
 {
     BigInt new_this = (*this);
     new_this -= other;
     return new_this;
 }
-/*
-This operation first finds the output sign. Then, does a multiplication just like the one we did in primary school.
+/**
+ * @brief This operation first finds the output sign. Then, does a multiplication just like the one we did in primary school.
  It iterates over the digits of the second number ( from smaller to greater digit) and does the multiplication. 
  To do the multiplication, the digit is multiplied by each digit in the first number (from the smallest to the greatest),
 the modulo by 10 is stored as the output number for the corresponding digit, and the remaining divided by 10 is carried to the next digit.
 Finally, sums them up.
-*/
+ * 
+ * @param other 
+ * @return BigInt& 
+ */
 BigInt &BigInt::operator*=(const BigInt &other)
 {
     char new_sign;
@@ -419,14 +495,25 @@ BigInt &BigInt::operator*=(const BigInt &other)
     *this = summed;
     return *this;
 }
-// this operator uses the multiply and assign that we wrote.
+/**
+ * @brief this operator uses the multiply and assign that we wrote.
+ * 
+ * @param other 
+ * @return BigInt 
+ */
 BigInt BigInt::operator*(const BigInt &other) const
 {
     BigInt new_this = (*this);
     new_this *= other;
     return new_this;
 }
-// this operator inserts to an output stream
+/**
+ * @brief this operator inserts to an output stream
+ * 
+ * @param os 
+ * @param bigint 
+ * @return ostream& 
+ */
 ostream &operator<<(std::ostream &os, const BigInt &bigint)
 {
     return os << bigint.sign << bigint.value;
